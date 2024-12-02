@@ -16,6 +16,7 @@ async function getOrderBook(action, amountRequested) {
         
         const buy = response.data.bids; 
         const sell = response.data.asks;  
+        const lastTradePrice = response.data.lastTradePrice;
 
         let totalPrice = 0;
         let totalAmount = 0;
@@ -62,6 +63,7 @@ async function getOrderBook(action, amountRequested) {
 
         console.log(`Total price for ${action}ing ${totalAmount} is: ${totalPrice}`);
         console.log(`Average price for ${action}ing is: ${averagePrice}`);
+        console.log(`Last trade price is: ${lastTradePrice}`);
     } catch (error) {
         console.error('Error fetching order book:', error);
     }
