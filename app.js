@@ -1,5 +1,7 @@
 const axios = require('axios');
 const readline = require('readline');
+require('dotenv').config()
+let ROUTE = process.env.USDT_Route
 
 //reading data from console
 const rl = readline.createInterface({
@@ -10,7 +12,7 @@ const rl = readline.createInterface({
 //function to get the order book
 async function getOrderBook(action, amountRequested) {
     try {
-        const response = await axios.get('https://api.nobitex.ir/v3/orderbook/USDTIRT');
+        const response = await axios.get(`${ROUTE}`);
         
         const buy = response.data.bids; 
         const sell = response.data.asks;  
