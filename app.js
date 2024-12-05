@@ -1,7 +1,8 @@
 const axios = require('axios');
 const readline = require('readline');
 require('dotenv').config()
-let ROUTE = process.env.USDT_Route
+let NOBITEX = process.env.NOBITEX_Route
+// let WALLEX = process.env.WALLEX_Route
 
 //reading data from console
 const rl = readline.createInterface({
@@ -12,11 +13,10 @@ const rl = readline.createInterface({
 //function to get the order book
 async function getOrderBook(action, amountRequested) {
     try {
-        const response = await axios.get(`${ROUTE}`);
+        const response = await axios.get(NOBITEX);
         
         const buy = response.data.bids; 
         const sell = response.data.asks;  
-        const lastTradePrice = response.data.lastTradePrice;
 
         let totalPrice = 0;
         let totalAmount = 0;
@@ -63,7 +63,6 @@ async function getOrderBook(action, amountRequested) {
 
         console.log(`Total price for ${action}ing ${totalAmount} is: ${totalPrice}`);
         console.log(`Average price for ${action}ing is: ${averagePrice}`);
-        console.log(`Last trade price is: ${lastTradePrice}`);
     } catch (error) {
         console.error('Error fetching order book:', error);
     }
